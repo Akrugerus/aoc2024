@@ -78,6 +78,34 @@ class Runner:
         return forwards + backwards
 
 
+class Runner2:
+    def __init__(self, data):
+        self.width = data.index("\n")
+        self.data = data
+
+    def x_mas_search(self):
+        width = self.width - 1
+        patterns = [
+            rf"M.S.{{{width}}}A.{{{width}}}M.S",
+            rf"S.M.{{{width}}}A.{{{width}}}S.M",
+            rf"M.M.{{{width}}}A.{{{width}}}S.S",
+            rf"S.S.{{{width}}}A.{{{width}}}M.M",
+        ]
+        matches = 0
+
+        for pattern in patterns:
+            pat = re.compile(pattern, flags=re.DOTALL)
+            pos = 0
+            while m := pat.search(self.data, pos):
+                pos = m.start() + 1
+                print(pat.pattern)
+                print(m[0])
+                matches += 1
+
+        print(matches)
+        return matches
+
+
 if __name__ == "__main__":
     with open("day4/sample.txt") as file:
         runner = Runner(file.read())
@@ -86,3 +114,11 @@ if __name__ == "__main__":
     with open("day4/input.txt") as file:
         runner = Runner(file.read())
         print(runner.xmas_search())
+
+    with open("day4/sample.txt") as file:
+        runner = Runner2(file.read())
+        assert runner.x_mas_search() == 9
+
+    with open("day4/input.txt") as file:
+        runner = Runner2(file.read())
+        print(runner.x_mas_search())
