@@ -48,15 +48,14 @@ class Runner:
                 continue
             nodes += 1
             self.visited[node] = True
-            print(f"found {node}")
+            # print(f"found {node}")
             new_nodes = self.search_node(node)
             edges += 4 - len(new_nodes)
             for n in new_nodes:
                 if self.get_val(n) != group_ch:
                     edges += 1
                     continue
-                if n not in self.visited:
-                    q.append(n)
+                q.append(n)
 
         print(f"{group_ch} is {nodes} {edges}")
         return nodes * edges
