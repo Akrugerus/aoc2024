@@ -1,5 +1,6 @@
 from collections import deque
 
+
 class Runner:
     def __init__(self, data):
         self.data = data
@@ -15,7 +16,7 @@ class Runner:
                 if node in self.visited:
                     continue
 
-                total += self.find_group(node )
+                total += self.find_group(node)
         print(total)
         return total
 
@@ -25,13 +26,13 @@ class Runner:
     def search_node(self, node):
         new_nodes = []
         if node[0] > 0:
-            new_nodes.append((node[0] -1, node[1]))
+            new_nodes.append((node[0] - 1, node[1]))
         if node[0] < len(self.data) - 1:
-            new_nodes.append((node[0] +1, node[1]))
+            new_nodes.append((node[0] + 1, node[1]))
         if node[1] > 0:
-            new_nodes.append((node[0], node[1]-1))
-        if node[1] < len(self.data[0]) -1:
-            new_nodes.append((node[0], node[1] +1))
+            new_nodes.append((node[0], node[1] - 1))
+        if node[1] < len(self.data[0]) - 1:
+            new_nodes.append((node[0], node[1] + 1))
         return new_nodes
 
     def find_group(self, node):
@@ -49,7 +50,7 @@ class Runner:
             self.visited[node] = True
             print(f"found {node}")
             new_nodes = self.search_node(node)
-            edges += (4 - len(new_nodes))
+            edges += 4 - len(new_nodes)
             for n in new_nodes:
                 if self.get_val(n) != group_ch:
                     edges += 1
@@ -60,6 +61,7 @@ class Runner:
         print(f"{group_ch} is {nodes} {edges}")
         return nodes * edges
 
+
 if __name__ == "__main__":
     with open("day12/sample.txt") as file:
         runner = Runner(file.read().splitlines())
@@ -68,4 +70,3 @@ if __name__ == "__main__":
     with open("day12/input.txt") as file:
         runner = Runner(file.read().splitlines())
         print(runner.group_areas())
-
