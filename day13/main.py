@@ -58,3 +58,10 @@ if __name__ == "__main__":
     with open("day13/input.txt") as file:
         runner = Runner(file.read())
         print(runner.run())
+
+    with open("day13/input.txt") as file:
+        runner = Runner(file.read())
+        for game in runner.games:
+            game.prize_x += 10000000000000
+            game.prize_y += 10000000000000
+        print(runner.run())
